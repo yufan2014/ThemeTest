@@ -2,6 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?app_background">
+
+    <TextView
+        android:id="@+id/tv_main_setting"
+        android:text="设置"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginTop="1dp"
+        android:textColor="?main_text"
+        android:background="?btn_background"/>
 
 </LinearLayout>

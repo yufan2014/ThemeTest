@@ -2,8 +2,6 @@
 <resources>
 
     <attr name="app_background" format="reference|color" />
-    <attr name="app_backgroundGray" format="reference|color" />
-    <attr name="main_pic" format="reference|color" />
     <attr name="main_text" format="reference|color" />
     <attr name="btn_text" format="reference|color" />
     <attr name="btn_background" format="reference" />

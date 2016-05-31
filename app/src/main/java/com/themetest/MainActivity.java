@@ -1,9 +1,7 @@
 package com.themetest;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,7 +12,8 @@ public class MainActivity extends BaseActivity {
 
     @InjectView(R.id.tv_main_setting)
     TextView tvMainSetting;
-    private SkinBroadcastReceiver skinBroadcastReceiver;
+    @InjectView(R.id.tv_main_to_other)
+    TextView tv_main_to_other;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,35 +25,28 @@ public class MainActivity extends BaseActivity {
         tvMainSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentSkinType = SkinManager.getCurrentSkinType(MainActivity.this);
-                if (SkinManager.THEME_DAY == currentSkinType) {
-                    SkinManager.changeSkin(MainActivity.this, SkinManager.THEME_NIGHT);
+                int currentSkinType = ThemeManager.getCurrentThemeType(MainActivity.this);
+                if (ThemeManager.THEME_DAY == currentSkinType) {
+                    ThemeManager.changeTheme(MainActivity.this, ThemeManager.THEME_NIGHT);
                 } else {
-                    SkinManager.changeSkin(MainActivity.this, SkinManager.THEME_DAY);
+                    ThemeManager.changeTheme(MainActivity.this, ThemeManager.THEME_DAY);
                 }
             }
         });
 
+
+        tv_main_to_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,OtherActivity.class));
+            }
+        });
     }
 
-
-    private void registerSkinReceiver() {
-        if (skinBroadcastReceiver == null) {
-            skinBroadcastReceiver = new SkinBroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    Log.i("onReceive", "MainActivity广播来了");
-                    recreate();
-                }
-            };
-            SkinManager.registerSkinReceiver(MainActivity.this, skinBroadcastReceiver);
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.reset(this);
-//        SkinManager.unregisterSkinReceiver(this, skinBroadcastReceiver);
     }
 }
